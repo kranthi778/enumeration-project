@@ -367,3 +367,176 @@ In this part I learned:
 - How to get into shared folders.
 
 - How to use RPC to find out about servers.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Part 3 – SMTP Enumeration
+
+## Objective
+
+I want to learn how to get information from an SMTP service. This will help me understand how a mail server is set up.
+
+---
+
+# What is SMTP Enumeration?
+
+SMTP Enumeration is when you interact with an SMTP server to find out things like:
+
+- What SMTP commands the server supports
+
+- If the server will tell you who the users are
+
+- What kind of mail server software is being used
+
+- What the SMTP banner says
+
+- What the server can do
+
+This helps people who work on security understand how the mail server is set up.
+
+---
+
+# What is SMTP?
+
+SMTP is used to send email between mail servers.
+
+The default port for SMTP is:
+
+- TCP 25
+
+---
+
+## 1. Get the SMTP Banner
+
+### Scenario
+
+I will connect to the SMTP service. Read the server banner.
+
+### Command
+
+```bash
+
+nc <target IP> 25
+
+```
+
+### Description
+
+This connects to the SMTP service. Shows me the banner that the mail server sends back.
+
+I need to replace the IP address with the one I am trying to connect to.
+
+### Screenshot
+
+![Alt text](screenshots/smtp-banner.png)
+
+---
+
+## 2. Show SMTP Help
+
+### Scenario
+
+I want to see what SMTP commands are supported.
+
+### Command
+
+After I connect with Netcat I type:
+
+```text
+
+HELP
+
+```
+
+### Description
+
+This shows me the SMTP commands that the server supports.
+
+### Screenshot
+
+![Alt text](screenshots/smtp-help.png)
+
+---
+
+## 3. Check if a User Exists
+
+### Scenario
+
+I want to see if a certain username is on the mail server.
+
+### Command
+
+After I connect I type:
+
+```text
+
+VRFY msfadmin
+
+```
+
+### Description
+
+This tries to see if the user I specified really exists.
+
+Some SMTP servers do not allow this for security reasons.
+
+### Screenshot
+
+![Alt text](screenshots/smtp-vrfy.png)
+
+---
+
+## 4. Show Extended SMTP Features
+
+### Scenario
+
+I want to see what the SMTP server can do.
+
+### Command
+
+After I connect I type:
+
+```text
+
+EHLO kali
+
+```
+
+### Description
+
+This asks the server to show me what SMTP extensions it supports.
+
+### Screenshot
+
+![Alt text](screenshots/smtp-ehlo.png)
+
+---
+
+# Key Concepts Learned
+
+- SMTP Enumeration
+
+- SMTP Banner
+
+- EHLO
+
+- HELP Command
+
+- VRFY Command
+
+- Mail Server Enumeration
+
+---
+
+# Conclusion
+
+In this part, I learned:
+
+- How to enumerate an SMTP server.
+- How to identify supported SMTP commands.
+- How SMTP banners reveal server information.
+- How EHLO displays server capabilities.
+- Why SMTP enumeration is useful during information gathering.
