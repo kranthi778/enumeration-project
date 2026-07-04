@@ -540,3 +540,166 @@ In this part, I learned:
 - How SMTP banners reveal server information.
 - How EHLO displays server capabilities.
 - Why SMTP enumeration is useful during information gathering.
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Part 4 – NFS Enumeration
+
+## Objective
+
+I want to learn how Network File System (NFS) shares work and how to find the directories that are being shared. 
+This is important because if these shared file systems are not set up correctly people with intentions might get access to sensitive information.
+
+---
+
+# What is NFS?
+
+Network File System (NFS) is a way for computers to share files and directories over a network. Network File System (NFS) usually uses:
+
+- Port 2049
+
+- RPC Services
+
+If Network File System (NFS) is not set up correctly attackers might be able to get into the shared directories without needing a password.
+
+---
+
+# What is NFS Enumeration?
+
+NFS Enumeration is the process of finding out what file shares are being exported. If we can get to them. By doing this we can find out:
+
+- What directories are being shared
+
+- What resources are being shared
+
+- Who has permission to access these shared resources
+
+- Information about how these shared resourcesre set up
+
+---
+
+## 1. Display Exported NFS Shares
+
+### Scenario
+
+I need to find out what directories the target Network File System (NFS) server is sharing.
+
+### Command
+
+```bash
+
+showmount -e 192.168.1.10
+
+```
+
+### Description
+
+This command shows all the Network File System (NFS) shares that the target system is exporting. I should replace the IP address with the one I am trying to look at.
+
+### Screenshot
+
+![Alt text](screenshots/showmount-exports.png)
+
+---
+
+## 2. Display All Mount Information
+
+### Scenario
+
+I want to get information about the file systems that are being shared.
+
+### Command
+
+```bash
+
+showmount -a 192.168.1.10
+
+```
+
+### Description
+
+This command shows which computers are connected to the Network File System (NFS) server and what directories they are using. It is like getting a list of who's using what.
+
+### Screenshot
+
+![Alt text](screenshots/showmount-all.png)
+
+---
+
+## 3. Display Export List Using RPC
+
+### Scenario
+
+I want to ask the mount daemon what is being shared.
+
+### Command
+
+```bash
+
+showmount -d 192.168.1.10
+
+```
+
+### Description
+
+This command shows the directories that the Network File System (NFS) server is sharing. It is like getting a list of what's available.
+
+### Screenshot
+
+![Alt text](screenshots/showmount-directories.png)
+
+---
+
+## 4. Verify RPC Services
+
+### Scenario
+
+I need to find out what RPC services are running on the target computer.
+
+### Command
+
+```bash
+
+rpcinfo -p 192.168.1.10
+
+```
+
+### Description
+
+This command lists all the RPC services that are running including the ones that Network File System (NFS) uses.
+
+### Screenshot
+
+![Alt text](screenshots/rpcinfo-services.png)
+
+---
+
+# Key Concepts Learned
+
+- Network File System (NFS) Enumeration
+
+- Exported Shares
+
+- RPC Services
+
+- Network File Sharing
+
+- Mount Information
+
+---
+
+# conclusion
+
+In this part I learned:
+
+- How to find the Network File System (NFS) shares that are being exported.
+
+- How to get information, about the mounted file systems.
+
+- How Network File System (NFS) relies on RPC Services.
+
+- Why Network File System (NFS) shares that are not set up correctly can be a security risk.
